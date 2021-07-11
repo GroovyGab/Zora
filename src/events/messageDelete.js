@@ -10,9 +10,9 @@ module.exports = class extends Event {
   }
 
   /**
-   *
    * @param {CommandoMessage} message
    */
+  
   run(message) {
     if (!message.guild) return;
   }
