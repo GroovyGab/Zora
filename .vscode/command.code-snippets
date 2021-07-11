@@ -1,0 +1,59 @@
+{
+  // Place your Zora workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+  // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+  // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+  // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+  // Placeholders with the same ids are connected.
+  // Example:
+  "zcmd": {
+    "scope": "javascript,typescript",
+    "prefix": "zcmd",
+    "body": [
+      "const { Command, CommandoMessage } = require(\"discord.js-commando\");",
+      "$2",
+      "module.exports = class ChangeThisCommand extends Command {",
+      "constructor(client) {",
+      "super(client, {",
+      "name: \"ChangeThis\",",
+      "memberName: \"ChangeThis\",",
+      "group: \"ChangeThis\",",
+      "description: \"ChangeThis\",",
+      "clientPermissions: [],",
+      "argsType: \"multiple\"",
+      "});",
+      "}",
+      "$2",
+      "/**",
+      " * @param {CommandoMessage} message",
+      " * @param {String} args",
+      " */",
+      "$2",
+      "async run(message, args) {",
+      "this.client;",
+      "}",
+      "};"
+    ],
+
+    "description": "Comando de Zora"
+  },
+  "zevent": {
+    "scope": "javascript,typescript",
+    "prefix": "zevent",
+    "body": [
+      "const Event = require(\"../../structures/Event\");",
+      "$2",
+      "module.exports = class extends Event {",
+      "constructor(...args) {",
+      "super(...args, {",
+      "once: false,",
+      " });",
+      "}",
+      "$2",
+      "run() {",
+      "}",
+      "};"
+    ],
+    "description": "Evento de zora"
+  }
+}

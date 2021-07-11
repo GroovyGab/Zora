@@ -1,0 +1,42 @@
+{
+  "name": "zora",
+  "version": "0.0.3-DEV",
+  "description": "A General purpose Discord Bot.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "lavalink": "cd src\\LavalinkServer && java -Xmx2G -Xms2g -jar Lavalink.jar"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GaboTheCoder/Zora.git"
+  },
+  "keywords": [
+    "bot"
+  ],
+  "author": "GaboTheCoder",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/GaboTheCoder/Zora/issues"
+  },
+  "homepage": "https://github.com/GaboTheCoder/Zora#readme",
+  "dependencies": {
+    "bufferutil": "^4.0.3",
+    "common-tags": "^1.8.0",
+    "discord.js": "^12.5.3",
+    "discord.js-commando": "^0.12.3",
+    "erlpack": "github:discord/erlpack",
+    "i18n": "^0.13.3",
+    "libsodium-wrappers": "^0.7.9",
+    "node-postgres": "^0.6.2",
+    "sqlite": "^4.0.23",
+    "sqlite3": "^5.0.2",
+    "utf-8-validate": "^5.0.5",
+    "weather-js": "^2.0.0",
+    "zlib-sync": "^0.1.7"
+  },
+  "devDependencies": {
+    "eslint": "^7.27.0"
+  }
+}
