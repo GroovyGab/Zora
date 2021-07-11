@@ -52,10 +52,11 @@ module.exports = class RestartCommand extends Command {
               "Attempting a restart... (This could take a while)"
             );
 
-            this.client.destroy();
             const hrStart = Date.now();
+            this.client.destroy();
+
+            const hrDiff = Date.now();
             this.client.login(TOKEN).then(() => {
-              const hrDiff = Date.now();
               const time = hrDiff - hrStart;
 
               message.channel.send(
