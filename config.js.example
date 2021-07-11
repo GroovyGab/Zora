@@ -19,7 +19,6 @@ switch (process.env.NODE_ENV) {
   }
   default: {
     config = {
-      // Zora#1564 (818492941131055124)
       TOKEN: "<Your Discord Bot Token goes Here>",
       PREFIX: "<A prefix for the bot>",
       OWNER: "<Your Discord user ID (Can also be an array of IDs)>",
