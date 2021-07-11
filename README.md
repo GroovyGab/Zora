@@ -1,5 +1,7 @@
 <h1 align="center"><br>Zora<br></h1>
 
+# Do not take this README into consideration this thing is almost completely wrong, i'll update it sometime 😗
+
 # ℹ️ About Zora
 
 Nothing for now :P
