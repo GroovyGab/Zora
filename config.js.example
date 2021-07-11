@@ -1,0 +1,31 @@
+let config;
+
+switch (process.env.NODE_ENV) {
+  case "PROD": {
+    config = {
+      TOKEN: "<Your Discord bot token goes Here>",
+      PREFIX: "<A prefix for the bot>",
+      OWNER: "<Your Discord user ID (Can also be an array of IDs)>"
+    };
+    break;
+  }
+  case "STAGING": {
+    config = {
+      TOKEN: "<Your Discord Bot Token goes Here>",
+      PREFIX: "<A prefix for the bot>",
+      OWNER: "<Your Discord user ID (Can also be an array of IDs)>"
+    };
+    break;
+  }
+  default: {
+    config = {
+      // Zora#1564 (818492941131055124)
+      TOKEN: "<Your Discord Bot Token goes Here>",
+      PREFIX: "<A prefix for the bot>",
+      OWNER: "<Your Discord user ID (Can also be an array of IDs)>",
+      LOCALE: "ayy lmao 👽"
+    };
+  }
+}
+
+module.exports = config;
