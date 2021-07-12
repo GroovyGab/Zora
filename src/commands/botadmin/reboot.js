@@ -7,8 +7,8 @@ const { oneLine } = require("common-tags");
 module.exports = class RestartCommand extends Command {
   constructor(client) {
     super(client, {
-      name: "restart",
-      memberName: "restart",
+      name: "reboot",
+      memberName: "reboot",
       group: "botadmin",
       description: "none of your business",
       clientPermissions: [],
@@ -19,13 +19,17 @@ module.exports = class RestartCommand extends Command {
 
   /**
    * @param {CommandoMessage} message
-   * @param {String} args
    */
 
   run(message) {
     const RestartEmbed = new MessageEmbed()
-      .setTitle("Are you sure you want to restart?")
+      .setTitle("Are you sure you want to reboot?")
       .setThumbnail(this.client.user.avatarURL())
+      .setFooter(
+        `${message.author.tag} (${message.author.id})`,
+        message.author.avatarURL()
+      )
+      .setTimestamp()
       .setDescription(
         oneLine`
         This could affect the user experience and there is a risk that the internal structure of the bot will fail. 
@@ -44,19 +48,19 @@ module.exports = class RestartCommand extends Command {
 
       msg
         .awaitReactions(filter, { max: 1, time: 30000, errors: ["time"] })
-        .then((collected) => {
+        .then(async (collected) => {
           const reaction = collected.first();
 
           if (reaction.emoji.name === "✅") {
             message.channel.send(
-              "Attempting a restart... (This could take a while)"
+              "Attempting a reboot... (This could take a while)"
             );
 
             const hrStart = Date.now();
             this.client.destroy();
 
-            const hrDiff = Date.now();
-            this.client.login(TOKEN).then(() => {
+            await this.client.login(TOKEN).then(() => {
+              const hrDiff = Date.now();
               const time = hrDiff - hrStart;
 
               message.channel.send(
