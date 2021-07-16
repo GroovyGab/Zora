@@ -20,6 +20,7 @@ module.exports = class PeekInviteCommand extends Command {
    */
 
   async run(message, args) {
+    this.client.statcord.postCommand(this.name, message.author.id, this.client);
     if (!args.length) return;
     const InviteGuild = await this.client.fetchInvite(args[0]);
 

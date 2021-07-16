@@ -41,7 +41,7 @@
     "scope": "javascript,typescript",
     "prefix": "zevent",
     "body": [
-      "const Event = require(\"../../structures/Event\");",
+      "const Event = require(\"../structures/Event\");",
       "$2",
       "module.exports = class extends Event {",
       "constructor(...args) {",

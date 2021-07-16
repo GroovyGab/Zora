@@ -20,6 +20,7 @@ module.exports = class WeatherCommand extends Command {
    */
 
   async run(message, args) {
+    this.client.statcord.postCommand(this.name, message.author.id, this.client);
     if (!args.length) return;
     weather.find({ search: args, degreeType: "C" }, (err, result) => {
       if (err) {
@@ -27,28 +28,6 @@ module.exports = class WeatherCommand extends Command {
           "Cannot get the weather forecast for that location."
         );
       }
-
-      const currentDate = new Date(
-        `${result[0].current.date} ${result[0].current.observationtime}`
-      );
-
-      const weatherEmbed = new MessageEmbed()
-        .setTitle(`Reporte del clima de ${result[0].location.name}`)
-        .setThumbnail(result[0].current.imageUrl)
-        .addFields(
-          {
-            name: "☁ Clima",
-            value: `**Temperatura:** ${result[0].current.temperature}ºC\n**Se siente como:** ${result[0].current.feelslike}ºC\n**Humedad:** ${result[0].current.humidity}%\n**Viento:** ${result[0].current.windspeed}`,
-            inline: true
-          },
-          {
-            name: "🕑 Tiempo",
-            value: `**Fecha:** ${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}\n**Hora local:** `,
-            inline: true
-          }
-        );
-
-      message.channel.send(weatherEmbed);
     });
   }
 };

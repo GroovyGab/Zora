@@ -22,6 +22,7 @@ module.exports = class RestartCommand extends Command {
    */
 
   run(message) {
+    this.client.statcord.postCommand(this.name, message.author.id, this.client);
     const RestartEmbed = new MessageEmbed()
       .setTitle("Are you sure you want to reboot?")
       .setThumbnail(this.client.user.avatarURL())

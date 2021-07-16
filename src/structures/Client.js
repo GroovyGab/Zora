@@ -6,6 +6,8 @@ const { Collection, Intents } = require("discord.js");
 const ZoraIntents = new Intents();
 const Util = require("../util/Util");
 const i18n = require("i18n");
+const Statcord = require("statcord.js");
+const chalk = require("chalk");
 
 ZoraIntents.add(Intents.ALL);
 
@@ -16,8 +18,25 @@ module.exports = class CustomClient extends Client {
       owner: options.OWNER,
       disableMentions: "everyone",
       partials: ["CHANNEL", "GUILD_MEMBER", "MESSAGE", "REACTION", "USER"],
-      intents: ZoraIntents
+      intents: ZoraIntents,
+      ws: {
+        properties: {
+          $browser: "Discord iOS"
+        }
+      }
     });
+
+    const client = this;
+
+    const statcord = new Statcord.Client({
+      client,
+      key: options.STATCORD_KEY,
+      postCpuStatistics: true,
+      postMemStatistics: true,
+      postNetworkStatistics: true,
+    });
+
+    this.statcord = statcord;
 
     this.validate(options);
 
@@ -28,6 +47,16 @@ module.exports = class CustomClient extends Client {
     this.on("error", console.error)
       .on("warn", console.warn)
       .on("debug", console.log);
+
+    this.statcord
+      .on("autopost-start", () => {
+        console.log(`${chalk.bold.green("[Statcord]")} Started autopost`);
+      })
+      .on("post", (status) => {
+        if (!status)
+          console.log(`${chalk.bold.green("[Statcord]")}  Successful post`);
+        else console.error(status);
+      });
 
     i18n.configure({
       locales: ["en_us", "es_es"],

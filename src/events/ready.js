@@ -1,5 +1,6 @@
 const Event = require("../structures/Event");
-const mongo = require("../database/mongodb/mongo");
+const pool = require("../database/postgres/driver");
+const chalk = require("chalk");
 
 module.exports = class extends Event {
   constructor(...args) {
@@ -9,18 +10,24 @@ module.exports = class extends Event {
   }
 
   async run() {
-    await mongo().then((mongoose) => {
-      try {
-        console.log("[MongoDB] Connected to database.");
-      } catch (err) {
-        console.log("There was an error with MongoDb", err);
-      } finally {
-        mongoose.connection.close();
+    pool.query(
+      `SELECT bot_status FROM Bot WHERE bot_id = '${this.client.user.id}'`,
+      (err, res) => {
+        console.log(res.rows[0].bot_status);
+        pool.end();
       }
-    });
+    );
+
+    this.client.user.setActivity(
+      "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    );
+
+    this.client.statcord.autopost();
 
     console.log(
-      `Client ready; logged in as ${this.client.user.username}#${this.client.user.discriminator} (${this.client.user.id})`
+      `${chalk.bold.green("[BOT]")} Client ready; logged in as ${
+        this.client.user.username
+      }#${this.client.user.discriminator} (${this.client.user.id})`
     );
   }
 };
